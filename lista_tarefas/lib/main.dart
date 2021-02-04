@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List _toDolist = [];
+  DateTime _dateTime;
   Map<String, dynamic> _lastRemoved;
   int _lastRemovedPost;
 
@@ -31,34 +32,117 @@ class _HomeState extends State<Home> {
   }
 
   final _toDoController = TextEditingController();
-
-  void _addToDo() {
-    setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo["title"] = _toDoController.text;
-      _toDoController.text = "";
-      newToDo["ok"] = false;
-      _toDolist.add(newToDo);
-      _saveData();
-    });
-  }
+  final _txtDataControler = TextEditingController();
 
   Future<Null> _refresh() async {
     await Future.delayed(Duration(seconds: 1));
 
     setState(() {
-      _toDolist.sort((a,b){
-        if(a["ok"] && !b["ok"]) return 1;
-        else if(!a["ok"] && b["ok"]) return -1;
-        else return 0;
+      _toDolist.sort((a, b) {
+
+        if (a["ok"] && !b["ok"])
+          return 1;
+        else if (!a["ok"] && b["ok"])
+          return -1;
+        else
+          return 0;
       });
     });
     return null;
   }
 
+  Future<void> _askedToLead() async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.fromLTRB(17, 1, 17, 1),
+                  child: Column(
+                    children: <Widget>[
+                      TextField(
+                        controller: _toDoController,
+                        decoration: InputDecoration(
+                            labelText: "Nova Tarefa",
+                            labelStyle: TextStyle(color: Colors.blueAccent)),
+                        autofocus: true,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2001),
+                                  lastDate: DateTime(2222))
+                              .then((date) {
+                            setState(() {
+                              _dateTime = date;
+                              _txtDataControler.text =
+                                  _dateTime.day.toString() +
+                                      "/" +
+                                      _dateTime.month.toString() +
+                                      "/" +
+                                      _dateTime.year.toString();
+                            });
+                          });
+                        },
+                        child: TextField(
+                          decoration: InputDecoration(labelText: "Data"),
+                          enabled: false,
+                          controller: _txtDataControler,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: RaisedButton(
+                          elevation: 10,
+                          color: Colors.blueAccent,
+                          child: Text("Salvar"),
+                          textColor: Colors.white,
+                          onPressed: () {
+                            _addToDo();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  ))
+            ],
+          );
+        });
+  }
+
+  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            children: [
+              IconButton(
+                  icon: Icon(Icons.date_range),
+                  onPressed: () {
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2001),
+                            lastDate: DateTime(2222))
+                        .then((date) {
+                      setState(() {
+                        _dateTime = date;
+                      });
+                    });
+                  }),
+              Spacer(),
+              IconButton(icon: Icon(Icons.search), onPressed: () {}),
+              IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add), onPressed: _askedToLead),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
           title: Text("Lista de Tarefas"),
           backgroundColor: Colors.blueAccent,
@@ -66,27 +150,6 @@ class _HomeState extends State<Home> {
         ),
         body: Column(
           children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(17, 1, 7, 1),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                          labelText: "Nova Tarefa",
-                          labelStyle: TextStyle(color: Colors.blueAccent)),
-                      controller: _toDoController,
-                    ),
-                  ),
-                  RaisedButton(
-                    color: Colors.blueAccent,
-                    child: Text("ADD"),
-                    textColor: Colors.white,
-                    onPressed: _addToDo,
-                  )
-                ],
-              ),
-            ),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: _refresh,
@@ -95,12 +158,14 @@ class _HomeState extends State<Home> {
                     itemCount: _toDolist.length,
                     itemBuilder: buildItem),
               ),
-            )
+            ),
           ],
         ));
   }
 
   Widget buildItem(context, index) {
+
+
     return Dismissible(
       key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
       background: Container(
@@ -115,7 +180,7 @@ class _HomeState extends State<Home> {
       ),
       direction: DismissDirection.startToEnd,
       child: CheckboxListTile(
-        title: Text(_toDolist[index]['title']),
+        title: Text(_toDolist[index]['title'] + ' - ' + _toDolist[index]['data']),
         value: _toDolist[index]["ok"],
         secondary: CircleAvatar(
           child: Icon(_toDolist[index]["ok"] ? Icons.check : Icons.error),
@@ -147,10 +212,24 @@ class _HomeState extends State<Home> {
               }),
           duration: Duration(seconds: 2),
         );
-        Scaffold.of(context).removeCurrentSnackBar();    // ADICIONE ESTE COMANDO
+        Scaffold.of(context).removeCurrentSnackBar(); // ADICIONE ESTE COMANDO
         Scaffold.of(context).showSnackBar(snack);
       },
     );
+  }
+
+  void _addToDo() {
+    setState(() {
+      Map<String, dynamic> newToDo = Map();
+      newToDo["title"] = _toDoController.text;
+      newToDo["data"] = _txtDataControler.text;
+      _toDoController.text = "";
+      newToDo["ok"] = false;
+      _toDolist.add(newToDo);
+      _saveData();
+
+      print(_toDolist);
+    });
   }
 
   Future<File> _getFile() async {
