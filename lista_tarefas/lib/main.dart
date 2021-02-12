@@ -39,7 +39,6 @@ class _HomeState extends State<Home> {
 
     setState(() {
       _toDolist.sort((a, b) {
-
         if (a["ok"] && !b["ok"])
           return 1;
         else if (!a["ok"] && b["ok"])
@@ -135,8 +134,32 @@ class _HomeState extends State<Home> {
                     });
                   }),
               Spacer(),
-              IconButton(icon: Icon(Icons.search), onPressed: () {}),
-              IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+              IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    //AQUI
+                    GestureDetector(
+                      onTap: () {
+                        AlertDialog(
+                          title: Text('Reset settings?'),
+                          content: Text(
+                              'This will reset your device to its default factory settings.'),
+                          actions: [
+                            FlatButton(
+                              textColor: Color(0xFF6200EE),
+                              onPressed: () {},
+                              child: Text('CANCEL'),
+                            ),
+                            FlatButton(
+                              textColor: Color(0xFF6200EE),
+                              onPressed: () {},
+                              child: Text('ACCEPT'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }),
             ],
           ),
         ),
@@ -164,8 +187,6 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildItem(context, index) {
-
-
     return Dismissible(
       key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
       background: Container(
@@ -180,7 +201,8 @@ class _HomeState extends State<Home> {
       ),
       direction: DismissDirection.startToEnd,
       child: CheckboxListTile(
-        title: Text(_toDolist[index]['title'] + ' - ' + _toDolist[index]['data']),
+        title:
+            Text(_toDolist[index]['title'] + ' - ' + _toDolist[index]['data']),
         value: _toDolist[index]["ok"],
         secondary: CircleAvatar(
           child: Icon(_toDolist[index]["ok"] ? Icons.check : Icons.error),
