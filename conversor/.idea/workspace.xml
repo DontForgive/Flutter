@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0670d6b-fb75-4e64-854a-e0f74633d704" name="Default Changelist" comment="" />
+    <list default="true" id="b0670d6b-fb75-4e64-854a-e0f74633d704" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../agenda_contato/lib/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../design/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../design/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/lib/ui/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../gif/lib/ui/home_page.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +25,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../agenda_contato" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -38,9 +43,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1611974215019">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1613434046682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/1920.161.1360.728@0.0.1920.1040" timestamp="1611974215019" />
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/1920.161.1360.728@0.0.1920.1040" timestamp="1613434046682" />
   </component>
 </project>
