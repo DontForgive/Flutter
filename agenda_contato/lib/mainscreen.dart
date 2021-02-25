@@ -8,9 +8,9 @@
 //
 // ![A scaffold with a bottom navigation bar containing three bottom navigation
 // bar items. The first one is selected.](https://flutter.github.io/assets-for-api-docs/assets/material/bottom_navigation_bar.png)
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'agendamento.dart';
 
 void main() => runApp(MyApp());
 
@@ -39,12 +39,10 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static final List<Widget> _widgetOptions = <Widget>[
+   Agendamento(),
+
     Text(
       'Index 1: Business',
       style: optionStyle,
@@ -53,7 +51,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 2: School',
       style: optionStyle,
     ),
-
   ];
 
   void _onItemTapped(int index) {
@@ -68,7 +65,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text('BottomNavigationBar Sample'),
-
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -76,20 +72,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon:FaIcon(FontAwesomeIcons.fileAlt),
-            label: 'Home',
+            icon: FaIcon(FontAwesomeIcons.fileAlt),
+            label: 'Agendar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: FaIcon(FontAwesomeIcons.heart),
+            label: 'Consultas',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: FaIcon(FontAwesomeIcons.user),
+            label: 'Meu Perfil',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue[800],
         onTap: _onItemTapped,
       ),
     );
