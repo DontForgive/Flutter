@@ -76,7 +76,7 @@ class _ContactPageState extends State<ContactPage> {
                           fit: BoxFit.cover)),
                 ),
                 onTap: () {
-                  ImagePicker.pickImage(source: ImageSource.camera)
+                  ImagePicker.pickImage(source: ImageSource.gallery)
                       .then((file) {
                     if (file == null) return;
                     setState(() {
