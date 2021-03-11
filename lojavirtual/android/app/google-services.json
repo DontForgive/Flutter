@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "742962818422",
+    "project_id": "lojaflutter-eb7b5",
+    "storage_bucket": "lojaflutter-eb7b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742962818422:android:44369eb27d69c1a7e45e57",
+        "android_client_info": {
+          "package_name": "br.com.arruda.lojavirtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742962818422-q5332d048ob4g6emcepa63kb81il4j9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv4nFafqhA3FObSRdfkA0GN1EiSzzS2IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742962818422-q5332d048ob4g6emcepa63kb81il4j9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
