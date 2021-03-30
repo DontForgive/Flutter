@@ -5,7 +5,7 @@ import 'mainscreen.dart';
 
 
 void main() {
-  runApp(MaterialApp(home: MyApp()));
+  runApp(MaterialApp(home: Logar()));
 }
 
 

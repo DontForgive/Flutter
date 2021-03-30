@@ -11,57 +11,62 @@ class PlaceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: 100,
-            child: Image.network(
-              snapshot.data['image'],
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  snapshot.data['title'],
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                ),
-                Text(
-                  snapshot.data['address'],
-                  textAlign: TextAlign.start,
-                  style: TextStyle(),
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              FlatButton(
-                child: Text("Ver no Mapa"),
-                textColor: Colors.blue,
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  launch("https://www.google.com/maps/search/?api=1&query=${snapshot.data['lat']},"
-                      "${snapshot.data['long']}");
-                },
+      child: GestureDetector(
+        onTap: (){
+
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              height: 100,
+              child: Image.network(
+                snapshot.data['image'],
+                fit: BoxFit.cover,
               ),
-              FlatButton(
-                child: Text("Ligar"),
-                textColor: Colors.blue,
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  launch('tel: ${snapshot.data['phone']}');
-                },
-              )
-            ],
-          )
-        ],
+            ),
+            Container(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    snapshot.data['title'],
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  ),
+                  Text(
+                    snapshot.data['address'],
+                    textAlign: TextAlign.start,
+                    style: TextStyle(),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FlatButton(
+                  child: Text("Ver no Mapa"),
+                  textColor: Colors.blue,
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    launch("https://www.google.com/maps/search/?api=1&query=${snapshot.data['lat']},"
+                        "${snapshot.data['long']}");
+                  },
+                ),
+                FlatButton(
+                  child: Text("Ligar"),
+                  textColor: Colors.blue,
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    launch('tel: ${snapshot.data['phone']}');
+                  },
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
